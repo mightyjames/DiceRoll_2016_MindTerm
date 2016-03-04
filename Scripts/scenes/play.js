@@ -18,6 +18,7 @@ var scenes;
             this._4 = 0;
             this._5 = 0;
             this._6 = 0;
+            this._dice = "";
         }
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
@@ -28,13 +29,8 @@ var scenes;
             this._playLabel = new objects.Label("PLAY SCENE", "60px Consolas", "#000000", config.Screen.CENTER_X, config.Screen.CENTER_Y);
             this.addChild(this._playLabel);
             //Dice label
-            /*this._d1 = new objects.Label(
-                this.playerMoney.toString(),
-                "14px Consolas",
-                "#ff0000",
-                225, 78, false);
-            this._d1.textAlign = "right";
-            this.addChild(this._d1);*/
+            this._result = new objects.Label("Dice", "40px Consolas", "#ff0000", 167, 80);
+            this.addChild(this._result);
             //add Roll Dice
             this._rollButton = new objects.Button("roll", config.Screen.CENTER_X, config.Screen.CENTER_Y + 180);
             this.addChild(this._rollButton);
@@ -97,6 +93,8 @@ var scenes;
         //EVENT HANDLERS ++++++++++++++++++++
         Play.prototype._rollButtonClick = function (event) {
             console.log(this._rollDice());
+            this._dice = this._rollDice[0] + " - " + this._rollDice[1];
+            this._result.text = this._dice;
             /*var bitmap: string[] = this._rollDice();
 
             for (var reel: number = 0; reel < 2; reel++) {

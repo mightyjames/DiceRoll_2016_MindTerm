@@ -6,6 +6,7 @@ module scenes {
         private _rollButton: objects.Button;
         private _backgroundImage: createjs.Bitmap;
         private _roll: createjs.Bitmap[];
+        private _rollResult;
         
         //Dices
         private _1 = 0;
@@ -14,6 +15,7 @@ module scenes {
         private _4 = 0;
         private _5 = 0;
         private _6 = 0;
+        private _dice = "";
         //Dice label
         private _d1: objects.Label;
         private _d2: objects.Label;
@@ -21,6 +23,7 @@ module scenes {
         private _d4: objects.Label;
         private _d5: objects.Label;
         private _d6: objects.Label;
+        private _result:objects.Label;
         
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -41,14 +44,11 @@ module scenes {
                 "#000000",
                 config.Screen.CENTER_X, config.Screen.CENTER_Y);
             this.addChild(this._playLabel);
+            
             //Dice label
-            /*this._d1 = new objects.Label(
-                this.playerMoney.toString(),
-                "14px Consolas",
-                "#ff0000",
-                225, 78, false);
-            this._d1.textAlign = "right";
-            this.addChild(this._d1);*/
+            this._result = new objects.Label("Dice", "40px Consolas", "#ff0000",
+                167, 80);            
+            this.addChild(this._result);
             
             //add Roll Dice
             this._rollButton = new objects.Button(
@@ -124,8 +124,11 @@ module scenes {
         
         //EVENT HANDLERS ++++++++++++++++++++
         private _rollButtonClick(event: createjs.MouseEvent): void {
-            console.log(this._rollDice())
             
+            console.log(this._rollDice())
+            this._rollResult = this._rollDice();
+           this._dice = this._rollDice[0] + " - " + this._rollDice[1];
+                this._result.text = this._dice;
             /*var bitmap: string[] = this._rollDice();
 
             for (var reel: number = 0; reel < 2; reel++) {
